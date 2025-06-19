@@ -19,7 +19,7 @@ const Navbar = () => {
     <div className='bg-gray-50 '>
     
       <div className="sm:hidden flex justify-between bg-gray-50 items-center px-4 py-3  shadow-md fixed top-0 left-0 right-0 z-50">
-        <img src="/src/assets/logo.PNG" alt="Logo" className="h-8" />
+        <img src="/logo.PNG" alt="Logo" className="h-8" />
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="text-gray-700 focus:outline-none"
@@ -56,7 +56,7 @@ const Navbar = () => {
         <nav className="h-full flex flex-col p-4 pt-6">
        
           <div className="flex items-center justify-center sm:justify-start mb-6">
-            <img src="/src/assets/logo.PNG" alt="Logo" className="h-10" />
+            <img src="/logo.PNG" alt="Logo" className="h-10" />
           </div>
 
          
