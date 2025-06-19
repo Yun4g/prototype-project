@@ -268,7 +268,7 @@ const Dashboard = () => {
             </section>
 
             <section>
-                <div className="flex space-x-8 mb-6  ">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-0 md:space-x-8 mb-6  ">
                     <button
                         className=" pl-4 pr-10 py-2.5  font-semibold border border-gray-400 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-40" >
                         Trending events
