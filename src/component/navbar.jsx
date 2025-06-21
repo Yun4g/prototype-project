@@ -61,7 +61,7 @@ const Navbar = () => {
                       isActive ? 'bg-gray-200 text-gray-900' : 'hover:bg-gray-100 text-gray-700'
                     }`
                   }
-                  onClick={() => setMenuOpen(false)} // close menu on mobile after click
+                  onClick={() => setMenuOpen(false)} 
                 >
                   {icon ? (
                     <img src={icon} alt={label} className="w-5 h-5 mr-3" />
