@@ -1,9 +1,13 @@
-import { Search, Bell,  MapPin, Calendar, User, Bookmark } from 'lucide-react';
+import { Search, Bell, MapPin, Calendar, User, Bookmark } from 'lucide-react';
 import { SlidersHorizontal } from 'lucide-react';
+import { useState } from 'react';
 
 
 
-const Dashboard = () => {
+
+const FindEvent = () => {
+    const [searchQuery, setSearchQuery] = useState('');
+
 
     const featuredEvents = [
         {
@@ -205,9 +209,17 @@ const Dashboard = () => {
 
 
 
+    const filteredTrending = trendingEvents.filter(event =>
+        event.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+
+
+
+
     return (
         <main className="flex-1 p-6 md:p-14 bg-white min-h-screen  ">
-            <header className="mb-8 ">
+            <header className="mb-8 border-b-2">
                 <div className="flex justify-between items-start mb-6">
                     <div>
                         <h1 className=" text-xl md:text-3xl font-bold text-gray-900 mb-1">Hello, Chioma</h1>
@@ -225,46 +237,49 @@ const Dashboard = () => {
 
                 <div className="flex flex-col lg:flex-row  justify-between items-center gap-4 mb-8">
                     <div className="relative flex w-md  md:w-[600px]">
-
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                         <input
                             type="text"
                             placeholder="Search events"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                         />
-
                         <SlidersHorizontal className="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                     </div>
-
                     <div className="relative">
                         <div className=" pl-4 pr-10 py-2.5 border border-gray-200 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-40">
                             <p>Featured events</p>
-
                         </div>
-
                     </div>
                 </div>
             </header>
 
             <section className="mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Featured Events</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {featuredEvents.map(event => (
-                        <div key={event.id} className="bg-white rounded-lg flex shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">
-                            <img src={event.image} alt={event.title} className="w-[30%]  object-cover" />
-                            <div className="p-4 w-[70%] flex flex-wrap">
-                                <h3 className="text-lg font-semibold text-gray-900 ">{event.title}</h3>
-                                <div className="flex items-center text-sm text-gray-600">
-                                    <Calendar className="w-4 h-4 text-gray-400" />
-                                    <span>{event.date}</span>
-                                    <span className="mx-2 text-gray-400">•</span>
-                                    <User className="w-4 h-4  text-gray-400" />
-                                    <span>{event.attendees}</span>
+                <div className="relative overflow-hidden">
+                    <div className="flex gap-6 animate-scroll">
+                        {featuredEvents.concat(featuredEvents).map(event => (  
+                            <div
+                                key={event.id + Math.random()}  
+                                className="min-w-[300px] bg-white cursor-pointer rounded-lg flex shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200"
+                            >
+                                <img src={event.image} alt={event.title} className="w-[30%] object-cover" />
+                                <div className="p-4 w-[70%] flex flex-wrap">
+                                    <h3 className="text-lg font-semibold text-gray-900">{event.title}</h3>
+                                    <div className="flex items-center text-sm text-gray-600">
+                                        <Calendar className="w-4 h-4 text-gray-400" />
+                                        <span>{event.date}</span>
+                                        <span className="mx-2 text-gray-400">•</span>
+                                        <User className="w-4 h-4 text-gray-400" />
+                                        <span>{event.attendees}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
+
             </section>
 
             <section>
@@ -274,16 +289,16 @@ const Dashboard = () => {
                         Trending events
                     </button>
                     <button
-                     className=" pl-4 pr-10 py-2.5 border font-semibold border-gray-400 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-40">
+                        className=" pl-4 pr-10 py-2.5 border font-semibold border-gray-400 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-40">
                         Live events
                     </button>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                    {trendingEvents.map((trends) => (
+                    {filteredTrending.map((trends) => (
                         <div
                             key={trends.id}
-                            className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 hover:scale-[1.02] max-w-sm mx-auto w-full"
+                            className="bg-white rounded-xl cursor-pointer shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 hover:scale-[1.02] max-w-sm mx-auto w-full"
                         >
                             <div className="relative h-48 sm:h-52 lg:h-48 overflow-hidden">
                                 <img
@@ -298,8 +313,6 @@ const Dashboard = () => {
 
 
                             </div>
-
-
                             <div className="p-3 space-y-3">
                                 <div className=' flex  justify-between'>
                                     <h3 className="text-base font-semibold text-gray-900 leading-tight line-clamp-2">
@@ -334,4 +347,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default FindEvent;
