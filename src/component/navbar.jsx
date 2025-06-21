@@ -8,10 +8,10 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navItems = [
-    { icon: '/public/icon/Feropoints.png', label: 'Find Events', path: '/' },
-    { icon: '/public/icon/myEvent.png', label: 'My Events', path: '/my-events' },
-    { icon: '/public/icon/GoLive.png', label: 'Go Live', path: '/go-live' },
-    { icon: '/public/icon/Feropoints.png', label: 'Fero Points', path: '/fero-points' },
+    { icon: './public/icon/Feropoints.png', label: 'Find Events', path: '/' },
+    { icon: './public/icon/myEvent.png', label: 'My Events', path: '/my-events' },
+    { icon: './public/icon/GoLive.png', label: 'Go Live', path: '/go-live' },
+    { icon: './public/icon/Feropoints.png', label: 'Fero Points', path: '/fero-points' },
     { icon: null, lucideIcon: User, label: 'My Profile', path: '/profile', divider: true },
     { icon: null, lucideIcon: Settings, label: 'Settings', path: '/settings' },
   ];
